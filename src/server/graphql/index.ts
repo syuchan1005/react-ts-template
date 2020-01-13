@@ -42,16 +42,21 @@ export default class GraphQL {
         return fun ? fun.bind(this)(this) : {};
       }).reduce((a, o) => ({ ...a, ...o }), {});
 
+    const resolvers = {
+      /* handler(parent, args, context, info) */
+      Query: middlewareOps('Query'),
+      Mutation: middlewareOps('Mutation'),
+      Subscription: middlewareOps('Subscription'),
+    };
+    Object.keys(resolvers).forEach((k) => {
+      if (Object.keys(resolvers[k]).length === 0) delete resolvers[k];
+    });
+
     // eslint-disable-next-line no-underscore-dangle
     this.server = new ApolloServer({
       schema: makeExecutableSchema({
         typeDefs,
-        resolvers: {
-          /* handler(parent, args, context, info) */
-          Query: middlewareOps('Query'),
-          Mutation: middlewareOps('Mutation'),
-          Subscription: middlewareOps('Subscription'),
-        },
+        resolvers,
       }),
       tracing: process.env.NODE_ENV !== 'production',
     });

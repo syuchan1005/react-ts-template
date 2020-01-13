@@ -3,11 +3,3 @@ scalar Upload
 type Query {
     hello: String!
 }
-
-type Mutation {
-    dummy: Boolean
-}
-
-type Subscription {
-    dummy: Boolean
-}
