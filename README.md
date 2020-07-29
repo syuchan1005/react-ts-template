@@ -17,6 +17,7 @@
   - public/index.html [title, description]
   - public/manifest.webmanifest [name, short_name]
   - package.json [name]
+  - Dockerfile
 1. `npm install`
 1. `npm run serve:client` and `npm run serve:server`
 
