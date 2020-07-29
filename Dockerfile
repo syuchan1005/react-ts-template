@@ -5,7 +5,7 @@ COPY . /build
 WORKDIR /build
 
 RUN apk add --no-cache python build-base \
-    && npm ci && npm run build \
+    && npm i && npm run build \
     && mkdir /work \
     && mkdir /work/src \
     && mv dist/ /work/ \
